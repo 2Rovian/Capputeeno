@@ -2,12 +2,42 @@
 import Link from 'next/link';
 import { Produtos } from '../data/Produtos';
 import { useCategoriaStore } from '../store/useCategoria';
+import { usePaginaStore } from '../store/usePagina';
 
 export default function Grids() {
 
-    const { categoria } = useCategoriaStore();
+    const { paginaAtual } = usePaginaStore();
+    const { categoria }   = useCategoriaStore();
 
     let produtosFiltrados = Produtos.todos_produtos;
+    let SliceFinal = 12;
+    let SliceInicial = 0;
+    switch (paginaAtual){
+        case 1:
+            SliceInicial = 0;
+            SliceFinal = 12;
+            break;
+        case 2:
+            SliceInicial = 12;
+            SliceFinal = 24;
+            break;
+        case 3:
+            SliceInicial = 24;
+            SliceFinal = 36;
+            break;
+        case 4:
+            SliceInicial = 36;
+            SliceFinal = 48;
+            break;
+        case 5:
+            SliceInicial = 48;
+            SliceFinal = 60;
+            break;
+        default:
+            SliceInicial = 0;
+            SliceFinal = 12;
+            break;
+    }
 
     switch (categoria) {
         case 'CAMISETAS':
@@ -19,8 +49,8 @@ export default function Grids() {
     }
 
     return (
-        <div className="grid gap-4 md:gap-6 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ease-in-out duration-100">
-            {produtosFiltrados.slice(0, 12).map((produto) => (
+        <main className="grid gap-4 md:gap-6 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ease-in-out duration-100">
+            {produtosFiltrados.slice(SliceInicial, SliceFinal).map((produto) => (
                 <Link
                     href={`/produto/${produto.id}`}
                     key={produto.id}
@@ -39,6 +69,6 @@ export default function Grids() {
                     </article>
                 </Link>
             ))}
-        </div>
+        </main>
     )
 }

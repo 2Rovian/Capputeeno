@@ -38,7 +38,6 @@ export default function Paginacao() {
                 <FaAngleRight />
             </li>
 
-
         </ul>
     );
 }
