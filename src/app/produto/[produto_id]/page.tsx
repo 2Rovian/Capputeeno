@@ -1,24 +1,40 @@
 import { Produtos } from '../../data/Produtos';
+
+// ícones
 import { TbArrowBackUp } from "react-icons/tb";
 import { RiShoppingBag4Line } from "react-icons/ri";
+import { LuExpand } from "react-icons/lu";
+// ------ 
 import Link from "next/link";
+import Expand_img from '@/app/componentes/Expand_img';
 
 export default async function Detalhes_Produto({
-    params 
+    params
 }: {
     params: Promise<{ produto_id: string }>
-}){
+}) {
 
     const { produto_id } = await params;
     const produtoId = parseInt(produto_id, 10);
     const produto = Produtos.todos_produtos.find((p) => p.id === produtoId);
 
-    return(
+    if (!produto) {
+        return (
+            <div className="flex flex-col items-center justify-center h-screen">
+                <h1 className="text-2xl text-gray-950">Produto não encontrado</h1>
+                <Link href="/" className="mt-4 text-blue-600 hover:text-blue-800">
+                    Voltar para a página inicial
+                </Link>
+            </div>
+        );
+    }
+
+    return (
         <div>
             <div className="my-5">
                 <div className='cursor-pointer w-fit'>
                     <Link href='/'
-                    className='flex items-center gap-x-2 text-gray-700 hover:text-gray-950'
+                        className='flex items-center gap-x-2 text-gray-700 hover:text-gray-950'
                     >
                         <span className=' outline-2 outline-gray-700 rounded-full text-2xl'>
                             <TbArrowBackUp />
@@ -29,14 +45,15 @@ export default async function Detalhes_Produto({
             </div>
 
             <main className="flex flex-col lg:flex-row lg:gap-x-8 lg:h-[550px]">
-                <div className='rounded-lg grow overflow-hidden'>
-                    <img src={produto?.imagem} alt="imagem do produto" 
+                <div className='rounded-lg grow overflow-hidden relative'>
+                    <img src={produto?.imagem} alt={`Imagem do produto: ${produto.nome}`}
                     className="h-[400px] lg:h-[550px] w-full object-cover object-center"
                     />
+                    <Expand_img produtoImg={produto.imagem}/>
                 </div>
                 <div className="lg:w-[40%] flex flex-col justify-between text-gray-700 my-5 lg:my-0">
                     <div className="flex flex-col">
-                        <h2 className="text-lg">(caneca / camiseta)</h2>
+                        <h2 className="text-lg">{produto.tipo}</h2>
                         <h1 className='text-4xl text-gray-950 mt-2'>{produto?.nome}</h1>
                         <h3 className='text-xl mt-2 mb-4 font-bold text-black'>R$ {produto?.preco},00</h3>
                         <span className="mb-10">*Frete de R$40,00 para todo o Brasil, grátis para compras acima de R$900,00.</span>

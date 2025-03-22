@@ -4,12 +4,12 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCaretDown } from '@fortawesome/free-solid-svg-icons';
 import { faCaretUp } from '@fortawesome/free-solid-svg-icons';
+
 import { MdFilterListAlt } from 'react-icons/md';
-import { FaAngleDown } from "react-icons/fa";
-import { FaChevronUp } from "react-icons/fa";
+import { IoMdClose } from "react-icons/io";
+
 import { FaMoneyBillWave } from "react-icons/fa6";
 import { TiSortAlphabetically } from "react-icons/ti";
-import { IoMdClose } from "react-icons/io";
 
 // ------
 
@@ -17,15 +17,20 @@ import { useState } from 'react';
 
 import { Categoria, useCategoriaStore } from '../store/useCategoria';
 import { useOrganizarStore } from '../store/useOrganizarPor';
+import { usePaginaStore } from '../store/usePagina';
+
 
 export default function Categorias() {
     const { categoria, setCategoria } = useCategoriaStore();
     const { OrganizarPor, setOrganizarPor } = useOrganizarStore();
 
+    const { setPaginaAtual } = usePaginaStore();
+
     const categorias_array: Categoria[] = ['TODOS OS PRODUTOS', 'CAMISETAS', 'CANECAS'];
     const filtrarPor_array = ['Preço: menor para maior', 'Preço: maior para menor', 'Ordem alfabética (A → Z)', 'Ordem alfabética (Z → A)']
 
     const handleSelecionarCategoria = (categoria: Categoria) => {
+        setPaginaAtual(1);
         setCategoria(categoria);
     };
 
@@ -59,7 +64,6 @@ export default function Categorias() {
                         : 
                         <FontAwesomeIcon icon={faCaretDown} /> 
                         }
-                        
                         
                     </span>
                 </div>

@@ -17,16 +17,19 @@ export default function Navbar() {
                         />
                         <span className="px-2 text-xl">
                             <FontAwesomeIcon icon={faSearch}
-                            className="cursor-pointer"
+                                className="cursor-pointer"
                             />
                         </span>
                     </div>
 
-                    <span className="text-xl py-1 px-2">
+
+                    <Link href='/carrinho'
+                        className="text-xl py-1 px-2">
                         <FontAwesomeIcon icon={faCartShopping}
-                        className="cursor-pointer"
+                            className="cursor-pointer"
                         />
-                    </span>
+                    </Link>
+
                 </div>
 
             </nav>

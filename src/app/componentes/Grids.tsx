@@ -4,40 +4,17 @@ import { Produtos } from '../data/Produtos';
 import { useCategoriaStore } from '../store/useCategoria';
 import { usePaginaStore } from '../store/usePagina';
 
+import Image from 'next/image';
+
 export default function Grids() {
 
     const { paginaAtual } = usePaginaStore();
-    const { categoria }   = useCategoriaStore();
+    const { categoria } = useCategoriaStore();
 
     let produtosFiltrados = Produtos.todos_produtos;
-    let SliceFinal = 12;
-    let SliceInicial = 0;
-    switch (paginaAtual){
-        case 1:
-            SliceInicial = 0;
-            SliceFinal = 12;
-            break;
-        case 2:
-            SliceInicial = 12;
-            SliceFinal = 24;
-            break;
-        case 3:
-            SliceInicial = 24;
-            SliceFinal = 36;
-            break;
-        case 4:
-            SliceInicial = 36;
-            SliceFinal = 48;
-            break;
-        case 5:
-            SliceInicial = 48;
-            SliceFinal = 60;
-            break;
-        default:
-            SliceInicial = 0;
-            SliceFinal = 12;
-            break;
-    }
+    let produtosPorPagina = 12;
+    const SliceInicial = (paginaAtual - 1) * produtosPorPagina;
+    const SliceFinal = SliceInicial + produtosPorPagina;
 
     switch (categoria) {
         case 'CAMISETAS':
@@ -58,8 +35,14 @@ export default function Grids() {
                     <article
                         className='rounded-t-md bg-gray-100 overflow-hidden shadow cursor-pointer hover:outline-2 outline-amber-600 duration-300 ease-in-out hover:scale-105'
                     >
-                        <img src={produto.imagem} alt={produto.nome}
+                        <Image
+                            src={produto.imagem}
+                            alt={produto.nome}
+                            width={300}
+                            height={300} 
                             className='h-[250px] md:h-[300px] object-cover object-center w-full'
+                            loading="lazy"
+                        
                         />
                         <div className='px-2 py-1'>
                             <h2 className='text-gray-700'>{produto.nome}</h2>
