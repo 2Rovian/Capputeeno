@@ -4,7 +4,9 @@ import { Produtos } from '../data/Produtos';
 import { useCategoriaStore } from '../store/useCategoria';
 import { usePaginaStore } from '../store/usePagina';
 
-import Image from 'next/image';
+// Componentes
+import Produto_Article from './Produto_Article';
+// -----------
 
 export default function Grids() {
 
@@ -32,24 +34,7 @@ export default function Grids() {
                     href={`/produto/${produto.id}`}
                     key={produto.id}
                 >
-                    <article
-                        className='rounded-t-md bg-gray-100 overflow-hidden shadow cursor-pointer hover:outline-2 outline-amber-600 duration-300 ease-in-out hover:scale-105'
-                    >
-                        <Image
-                            src={produto.imagem}
-                            alt={produto.nome}
-                            width={300}
-                            height={300} 
-                            className='h-[250px] md:h-[300px] object-cover object-center w-full'
-                            loading="lazy"
-                        
-                        />
-                        <div className='px-2 py-1'>
-                            <h2 className='text-gray-700'>{produto.nome}</h2>
-                            <div className='bg-gray-300 h-[1px] my-1' />
-                            <h3 className='text-gray-950 font-bold'>R$ {produto.preco},00</h3>
-                        </div>
-                    </article>
+                    <Produto_Article produto={produto}/>
                 </Link>
             ))}
         </main>

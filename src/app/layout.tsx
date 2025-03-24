@@ -1,5 +1,6 @@
 import "./globals.css";
 import Navbar from "./componentes/Navbar";
+import { Toaster } from 'react-hot-toast'
 
 import { config } from '@fortawesome/fontawesome-svg-core'
 import '@fortawesome/fontawesome-svg-core/styles.css'
@@ -17,6 +18,7 @@ export default function RootLayout({
         <div className="max-w-7xl mx-auto px-4 xl:px-0">
           {children}
         </div>
+        <Toaster position='bottom-right'/>
       </body>
     </html>
   );

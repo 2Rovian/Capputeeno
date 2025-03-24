@@ -8,6 +8,10 @@ import { LuExpand } from "react-icons/lu";
 import Link from "next/link";
 import Expand_img from '@/app/componentes/Expand_img';
 
+import ButtonCart from './ButtonCart';
+
+import { handleAddCarrinho } from '@/app/componentes/AddCarrinho';
+
 export default async function Detalhes_Produto({
     params
 }: {
@@ -61,10 +65,7 @@ export default async function Detalhes_Produto({
                         <h3>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate modi nihil, aliquid quasi eaque architecto aperiam ut quos exercitationem fugit ipsam ex facilis laborum rem harum iusto asperiores earum itaque.</h3>
                     </div>
 
-                    <button className='bg-blue-800 hover:bg-blue-500 py-2 mt-5 lg:mt-0 text-white flex items-center justify-center gap-x-2 cursor-pointer duration-300 ease-in-out rounded-lg'>
-                        <RiShoppingBag4Line />
-                        <span>ADICIONAR AO CARRINHO</span>
-                    </button>
+                    <ButtonCart produto={produto} />
                 </div>
             </main>
         </div>

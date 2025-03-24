@@ -4,16 +4,23 @@ import { FaRegTrashCan } from "react-icons/fa6";
 import { RxCaretDown } from "react-icons/rx";
 import { RxCaretUp } from "react-icons/rx";
 import { useState } from 'react';
+import Image from "next/image";
 
-export default function Carrinho_Article() {
+export default function Carrinho_Article({ produto }: any) {
     return (
         <article className="w-full h-fitt bg-white rounded-md overflow-hidden flex flex-col md:flex-row justify-between">
-            <img src="https://placehold.co/600x400" alt="" className="w-full h-[250px] object-center object-cover" />
+            {/* <img src={produto.imagem} alt="" className="w-full md:max-w-[300px] h-[250px] object-center object-cover" /> */}
 
-            <div className="flex flex-col justify-between grow px-3">
+            <Image src={produto.imagem} alt=""
+            width={300}
+            height={300}
+            loading="lazy"
+            className="w-full md:max-w-[300px] h-[250px] object-center object-cover" />
+
+            <div className="flex flex-col justify-between grow px-3 md:px-5">
                 <div className="min-h-[125px]">
                     <div className="flex items-center justify-between my-2">
-                        <h3 className="text-2xl font-semibold">Nome do Produto</h3>
+                        <h3 className="text-2xl font-semibold">{produto.nome}</h3>
                         <span className="text-red-500 text-lg rounded-md duration-200 ease-in-out cursor-pointer hover:px-2 hover:py-1 hover:bg-red-500 hover:text-red-50">
                             <FaRegTrashCan />
                         </span>
@@ -30,7 +37,7 @@ export default function Carrinho_Article() {
                         
                         </span>
                     </div>
-                    <span className="font-bold text-lg">R$ 40,00</span>
+                    <span className="font-bold text-lg">R$ {produto.preco},00</span>
                 </div>
 
             </div>
