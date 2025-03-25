@@ -3,6 +3,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { IoCloseCircleOutline } from "react-icons/io5";
+
 import { useState } from "react";
 
 import { Produtos } from "../data/Produtos";
@@ -24,10 +26,17 @@ export default function InputNavbar() {
                 value={inputValue}
                 onChange={(e) => { setInputValue(e.target.value) }}
             />
-            <span className="px-2 text-xl">
-                <FontAwesomeIcon icon={faSearch}
-                    className="cursor-pointer"
-                />
+            <span className="px-2 text-xl cursor-pointer">
+                {inputValue ?
+                    <span className='hover:text-white duration-200 ease-in-out'
+                    onClick={() => setInputValue('')}
+                    >
+                        <IoCloseCircleOutline />
+                    </span>
+                    :
+                    <FontAwesomeIcon icon={faSearch} />
+                }
+
             </span>
 
             {inputValue && ProdutosFiltrados.length > 0 && (
@@ -36,7 +45,7 @@ export default function InputNavbar() {
                         <div key={produto.id} className="h-fit flex flex-col border-b py-2 last:border-b-0">
                             <div className="flex gap-2 items-center">
                                 <Link className='cursor-pointer'
-                                href={`/produto/${produto.id}`}
+                                    href={`/produto/${produto.id}`}
                                 >
                                     <Image
                                         src={produto.imagem}
@@ -49,15 +58,15 @@ export default function InputNavbar() {
                                 </Link>
                                 <div className="flex flex-col flex-grow gap-y-0">
                                     <Link
-                                    className='cursor-pointer'
-                                    href={`/produto/${produto.id}`}
+                                        className='cursor-pointer'
+                                        href={`/produto/${produto.id}`}
                                     >
                                         <span className="text-sm font-semibold text-gray-700">{produto.nome}</span>
                                     </Link>
                                     <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center">
                                         <span className="text-gray-950 font-bold">R$ {produto.preco.toFixed(2)}</span>
                                         <button className="bg-amber-600 text-white rounded-md flex items-center px-2 hover:bg-amber-500 gap-x-2 cursor-pointer duration-200 ease-in-out self-start sm:self-auto"
-                                        onClick={(e) => {handleAddCarrinho(produto, e)}}
+                                            onClick={(e) => { handleAddCarrinho(produto, e) }}
                                         >
                                             <span>Add</span>
                                             <FontAwesomeIcon icon={faCartShopping} />
