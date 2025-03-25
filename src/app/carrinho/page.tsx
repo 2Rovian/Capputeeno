@@ -1,7 +1,4 @@
 // ícones
-import { FaRegTrashCan } from "react-icons/fa6";
-import { RxCaretDown } from "react-icons/rx";
-import { RxCaretUp } from "react-icons/rx";
 import { TbArrowBackUp } from "react-icons/tb";
 // ------
 

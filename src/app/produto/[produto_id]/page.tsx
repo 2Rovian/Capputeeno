@@ -2,15 +2,13 @@ import { Produtos } from '../../data/Produtos';
 
 // ícones
 import { TbArrowBackUp } from "react-icons/tb";
-import { RiShoppingBag4Line } from "react-icons/ri";
-import { LuExpand } from "react-icons/lu";
 // ------ 
 import Link from "next/link";
 import Expand_img from '@/app/componentes/Expand_img';
 
 import ButtonCart from './ButtonCart';
 
-import { handleAddCarrinho } from '@/app/componentes/AddCarrinho';
+import Image from 'next/image';
 
 export default async function Detalhes_Produto({
     params
@@ -50,7 +48,10 @@ export default async function Detalhes_Produto({
 
             <main className="flex flex-col lg:flex-row lg:gap-x-8 lg:h-[550px]">
                 <div className='rounded-lg grow overflow-hidden relative'>
-                    <img src={produto?.imagem} alt={`Imagem do produto: ${produto.nome}`}
+                    <Image 
+                    width={300}
+                    height={300}
+                    src={produto?.imagem} alt={`Imagem do produto: ${produto.nome}`}
                     className="h-[400px] lg:h-[550px] w-full object-cover object-center"
                     />
                     <Expand_img produtoImg={produto.imagem}/>

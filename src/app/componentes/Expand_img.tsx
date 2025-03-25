@@ -1,6 +1,7 @@
 'use client'
 import { useState } from "react"
 import { LuExpand, LuX } from "react-icons/lu";
+import Image from 'next/image'
 
 export default function Expand_img({ produtoImg }: any) {
     const [MostrarImagem, setMostrarImagem] = useState<boolean>(false);
@@ -27,13 +28,15 @@ export default function Expand_img({ produtoImg }: any) {
                     <div className="max-w-full max-h-full rounded-md overflow-hidden z-50"
                     onClick={(e) => e.stopPropagation()}
                     >
-                        <img
+                        <Image
+                            width={600}
+                            height={600}
                             src={produtoImg}
                             alt="Imagem expandida"
-                            className="max-w-full max-h-[90vh] object-contain"
+                            className="w-full max-h-[90vh] object-contain"
                         />
                     </div>
-                    {/* <img src={produtoImg} alt="imagem" /> */}
+                    
                 </div>
 
                 
